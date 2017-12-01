@@ -75,6 +75,26 @@
         inlineCSS: true
       };
     </script>
+
+    <style>
+pre .highlight {
+  font-weight: bold;
+  color: green;
+}
+pre .subject {
+  font-weight: bold;
+  color: RoyalBlue;
+}
+pre .property {
+  font-weight: bold;
+  color: DarkGoldenrod;
+}
+pre .comment {
+  font-weight: bold;
+  color: Gray;
+}
+    </style>
+
   </head>
   <body>
     <section id='abstract'>
@@ -103,6 +123,25 @@ or send them to
 A simple list-based mechanism for publishing and checking the status of a
 credential.
 </p>
+
+
+<pre class="example nohighlight" title="Usage of status property">
+{
+  "id": "http://dmv.example.gov/credentials/3732",
+  "type": ["Credential", "ProofOfAgeCredential"],
+  "issuer": "https://dmv.example.gov/issuers/14",
+  "issued": "2010-01-01T19:73:24Z",
+  "claim": {
+    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+    "ageOver": 21
+  },
+  <span class="highlight">"status": {
+    "id": "https://dmv.example.gov/status/24,
+    "type": "CredentialStatusList2017"
+  }</span>,
+  "signature": { ... }
+}</pre>
+
 </section>
 
 <section>
@@ -112,6 +151,20 @@ credential.
 Include the data model for the list-based credential revocation
 </p>
 
+<pre class="example nohighlight" title="Usage of status property">
+[{
+  "id": "http://dmv.example.gov/credentials/3732",
+  "credentialStatus": "Revoked",
+  "actionDate": "2017-12-05T14:27:42Z",
+  "reason": "Disciplinary action",
+  "signature": { ... }
+}, {
+  "id": "http://dmv.example.gov/credentials/2363",
+  "credentialStatus": "Suspended",
+  "actionDate": "2017-12-04T14:27:42Z",
+  "reason": "Investigation",
+  "signature": { ... }
+}... more status info here ... ]</pre>
 
 </section>
 
@@ -119,9 +172,35 @@ Include the data model for the list-based credential revocation
 <h1>Protocol</h1>
 
 <p class="issue">
-Include the protocol for the list-based credential revocation, which is 
+Include the protocol for the list-based credential revocation, which is
 basically HTTP GET.
 </p>
+
+    <pre class="example highlight" title="Credential status list retrieval example">
+GET /status/24 HTTP/1.1
+Host: dmv.example.gov
+Content-Type: application/ld+json
+Content-Length: 1062
+Accept: application/ld+json, application/json, text/plain, */*
+Accept-Encoding: gzip, deflate
+Link: &lt;https://w3id.org/credentials/v1>;
+  rel="http://www.w3.org/ns/json-ld#context";
+  type="application/ld+json"
+
+[{
+  "id": "http://dmv.example.gov/credentials/3732",
+  "credentialStatus": "Revoked",
+  "actionDate": "2017-12-05T14:27:42Z",
+  "reason": "Disciplinary action",
+  "signature": { ... }
+}, {
+  "id": "http://dmv.example.gov/credentials/2363",
+  "credentialStatus": "Suspended",
+  "actionDate": "2017-12-04T14:27:42Z",
+  "reason": "Investigation",
+  "signature": { ... }
+}... more status info here ... ]
+    </pre>
 
 </section>
 
