@@ -139,7 +139,7 @@ credential.
     "id": "https://dmv.example.gov/status/24,
     "type": "CredentialStatusList2017"
   }</span>,
-  "signature": { ... }
+  "proof": { ... }
 }</pre>
 
 </section>
@@ -152,25 +152,32 @@ Include the data model for the list-based credential revocation
 </p>
 
 <pre class="example nohighlight" title="Usage of status property">
-[{
-  "claim": {
-    "id": "http://dmv.example.gov/credentials/3732",
-    "currentStatus": "Revoked",
-    "statusReason": "Disciplinary action"
-  }
-  "issuer": "http://dmv.example.gov/",
-  "issued": "2017-12-05T14:27:42Z",
-  "signature": { ... }
-}, {
-  "claim": {
-    "id": "http://dmv.example.gov/credentials/2363",
-    "currentStatus": "Suspended",
-    "statusReason": "Investigation"
-  }
-  "issuer": "http://dmv.example.gov/",
-  "issued": "2017-12-04T14:27:42Z",
-  "signature": { ... }
-}... more status info here ... ]</pre>
+{
+  "id": "https://dmv.example.gov/status/24,
+  "description": "Status of example Department of Motor Vehicles credentials."
+  "verifiableCredential": [{
+    "claim": {
+      "id": "http://dmv.example.gov/credentials/3732",
+      "currentStatus": "Revoked",
+      "statusReason": "Disciplinary action"
+    },
+    "issuer": "http://dmv.example.gov/",
+    "issued": "2017-12-05T14:27:42Z",
+    "proof": { ... }
+  }, {
+    "claim": {
+      "id": "http://dmv.example.gov/credentials/2363",
+      "currentStatus": "Suspended",
+      "statusReason": "Investigation"
+    },
+    "issuer": "http://dmv.example.gov/",
+    "issued": "2017-12-04T14:27:42Z",
+    "proof": { ... }
+  },
+    // ... more status info here ...
+  }]
+}
+</pre>
 
 </section>
 
@@ -193,26 +200,31 @@ Link: &lt;https://w3id.org/credentials/v1>;
   rel="http://www.w3.org/ns/json-ld#context";
   type="application/ld+json"
 
-[{
-  "claim": {
-    "id": "http://dmv.example.gov/credentials/3732",
-    "currentStatus": "Revoked",
-    "statusReason": "Disciplinary action"
-  }
-  "issuer": "http://dmv.example.gov/",
-  "issued": "2017-12-05T14:27:42Z",
-  "signature": { ... }
-}, {
-  "claim": {
-    "id": "http://dmv.example.gov/credentials/2363",
-    "currentStatus": "Suspended",
-    "statusReason": "Investigation"
-  }
-  "issuer": "http://dmv.example.gov/",
-  "issued": "2017-12-04T14:27:42Z",
-  "signature": { ... }
-}... more status info here ... ]</pre>
-
+{
+  "id": "https://dmv.example.gov/status/24,
+  "description": "Status of example Department of Motor Vehicles credentials."
+  "verifiableCredential": [{
+    "claim": {
+      "id": "http://dmv.example.gov/credentials/3732",
+      "currentStatus": "Revoked",
+      "statusReason": "Disciplinary action"
+    },
+    "issuer": "http://dmv.example.gov/",
+    "issued": "2017-12-05T14:27:42Z",
+    "proof": { ... }
+  }, {
+    "claim": {
+      "id": "http://dmv.example.gov/credentials/2363",
+      "currentStatus": "Suspended",
+      "statusReason": "Investigation"
+    },
+    "issuer": "http://dmv.example.gov/",
+    "issued": "2017-12-04T14:27:42Z",
+    "proof": { ... }
+  },
+    // ... more status info here ...
+  }]
+}
 </section>
 
 </section>
